@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkinGuard AI — Intelligent Skin Disease Detection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="logo-mark">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="10" fill="url(#logoGrad)"/>
+            <path d="M10 16c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="16" cy="19" r="3" fill="#fff"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#f472b6"/>
+                <stop offset="1" stop-color="#c026d3"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">Skin<span class="logo-accent">Guard</span> <span class="logo-ai">AI</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#deteksi">Deteksi</a></li>
+        <li><a href="#chat">AI Chat</a></li>
+        <li><a href="#rumah-sakit">Rumah Sakit</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+      </ul>
+
+      <a href="#deteksi" class="nav-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Mulai Analisis
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#deteksi" onclick="closeMobileMenu()">Deteksi Penyakit</a>
+      <a href="#chat" onclick="closeMobileMenu()">AI Chat</a>
+      <a href="#rumah-sakit" onclick="closeMobileMenu()">Rumah Sakit</a>
+      <a href="#tentang" onclick="closeMobileMenu()">Tentang</a>
+      <a href="#deteksi" class="mobile-cta" onclick="closeMobileMenu()">Mulai Analisis</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="hero-grid"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge fade-up" style="--d:.05s">
+          <span class="badge-pulse"></span>
+          Didukung EfficientNetB0 · Dataset HAM10000 · TTA
+        </div>
+
+        <h1 class="hero-title fade-up" style="--d:.15s">
+          Deteksi Dini<br>
+          <span class="gradient-text">Penyakit Kulit</span><br>
+          dengan AI
+        </h1>
+
+        <p class="hero-desc fade-up" style="--d:.25s">
+          SkinGuard AI membantu proses pemeriksaan awal kondisi kulit melalui analisis gambar berbasis 
+          Artificial Intelligence dengan tampilan hasil yang mudah dipahami.
+        </p>
+
+        <div class="hero-actions fade-up" style="--d:.35s">
+          <a href="#deteksi" class="btn-primary-hero">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload Gambar Kulit
+          </a>
+          <a href="#tentang" class="btn-ghost-hero">Pelajari Lebih Lanjut</a>
+        </div>
+
+        <div class="hero-stats fade-up" style="--d:.45s">
+          <div class="hstat">
+            <span class="hstat-num">80.72%</span>
+            <span class="hstat-label">Test Accuracy</span>
+          </div>
+          <div class="hstat-sep"></div>
+          <div class="hstat">
+            <span class="hstat-num">&lt;1s</span>
+            <span class="hstat-label">Waktu Prediksi</span>
+          </div>
+          <div class="hstat-sep"></div>
+          <div class="hstat">
+            <span class="hstat-num">7 Kelas</span>
+            <span class="hstat-label">Lesi Kulit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right fade-right" style="--d:.2s">
+        <div class="hero-visual-wrap">
+          <!-- Scan focal point -->
+          <div class="hv-focal">
+            <div class="hv-ring hv-ring-1"></div>
+            <div class="hv-ring hv-ring-2"></div>
+            <div class="hv-ring hv-ring-3"></div>
+            <div class="hv-core-wrap">
+              <div class="hv-core-inner">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="url(#scanGrad)" stroke-width="1.5">
+                  <path d="M4 8V5a1 1 0 011-1h3" stroke-linecap="round"/>
+                  <path d="M16 4h3a1 1 0 011 1v3" stroke-linecap="round"/>
+                  <path d="M20 16v3a1 1 0 01-1 1h-3" stroke-linecap="round"/>
+                  <path d="M8 20H5a1 1 0 01-1-1v-3" stroke-linecap="round"/>
+                  <circle cx="12" cy="12" r="3.5"/>
+                  <path d="M9.5 12h5" stroke-linecap="round"/>
+                  <path d="M12 9.5v5" stroke-linecap="round"/>
+                  <defs>
+                    <linearGradient id="scanGrad" x1="0" y1="0" x2="24" y2="24">
+                      <stop stop-color="#f472b6"/>
+                      <stop offset="1" stop-color="#c026d3"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="hv-scan-line"></div>
+            </div>
+          </div>
+
+          <!-- Top Left Card -->
+          <div class="fcard fcard-tl">
+            <div class="fcard-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="fcard-content">
+              <p class="fcard-title">AI Verified</p>
+              <p class="fcard-sub">Deep Learning CNN</p>
+            </div>
+            <div class="fcard-dot fcard-dot-green"></div>
+          </div>
+
+          <!-- Top Right Card -->
+          <div class="fcard fcard-tr">
+            <div class="fcard-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M3 12h3m12 0h3M12 3v3m0 12v3"/></svg>
+            </div>
+            <div class="fcard-content">
+              <p class="fcard-title">Probability Analysis</p>
+              <p class="fcard-sub">Explainable AI</p>
+            </div>
+            <div class="fcard-dot fcard-dot-blue"></div>
+          </div>
+
+          <!-- Bottom Left Card -->
+          <div class="fcard fcard-bl">
+            <div class="fcard-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="fcard-content">
+              <p class="fcard-title">Referral Support</p>
+              <p class="fcard-sub">Hospital Recommendation</p>
+            </div>
+            <div class="fcard-dot fcard-dot-purple"></div>
+          </div>
+
+          <!-- Bottom Right Card -->
+          <div class="fcard fcard-br">
+            <div class="fcard-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <div class="fcard-content">
+              <p class="fcard-title">AI Assistant</p>
+              <p class="fcard-sub">Medical Chat Support</p>
+            </div>
+            <div class="fcard-dot fcard-dot-pink"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ABOUT / INTRO ═══════════════════════ -->
+  <section class="section section-light" id="tentang-intro">
+    <div class="container">
+      <div class="about-intro-grid">
+        <div class="abi-left">
+          <span class="section-tag">Tentang SkinGuard AI</span>
+          <h2 class="section-title left-align">Klasifikasi Dini,<br>Penanganan Lebih Tepat</h2>
+          <p class="section-para">
+            Lesi kulit dapat memiliki berbagai tingkat risiko, mulai dari kondisi ringan hingga yang membutuhkan perhatian medis lebih lanjut. SkinGuard AI membantu proses pemeriksaan awal dengan cara yang sederhana: unggah gambar kulit, tunggu proses analisis, lalu lihat hasil prediksi secara instan.
+          </p>
+          <p class="section-para">
+            Gambar akan diproses secara otomatis menggunakan model Artificial Intelligence untuk membantu mengenali pola kondisi kulit dan menampilkan tingkat keyakinan hasil prediksi.
+          </p>
+          <p class="section-note">
+            SkinGuard AI bersifat assistive — dirancang untuk mendukung pemeriksaan awal, bukan sebagai pengganti diagnosis dokter.
+          </p>
+        </div>
+        <div class="abi-right">
+          <div class="tech-stack-card">
+            <div class="tsc-header">Teknologi di Balik SkinGuard AI</div>
+            <div class="tech-items">
+              <div class="tech-item">
+                <div class="tech-dot"></div>
+                <div>
+                  <p class="tech-name">EfficientNetB0</p>
+                  <p class="tech-desc">Arsitektur deep learning untuk klasifikasi lesi kulit</p>
+                </div>
+              </div>
+              <div class="tech-item">
+                <div class="tech-dot"></div>
+                <div>
+                  <p class="tech-name">HAM10000 Dataset</p>
+                  <p class="tech-desc">10.000+ gambar dermatologi berlabel klinis</p>
+                </div>
+              </div>
+              <div class="tech-item">
+                <div class="tech-dot"></div>
+                <div>
+                  <p class="tech-name">Test-Time Augmentation</p>
+                  <p class="tech-desc">Prediksi gambar asli dan flip horizontal dirata-rata untuk hasil yang lebih stabil</p>
+                </div>
+              </div>
+              <div class="tech-item">
+                <div class="tech-dot"></div>
+                <div>
+                  <p class="tech-name">FastAPI + TensorFlow</p>
+                  <p class="tech-desc">Backend inferensi berkecepatan tinggi</p>
+                </div>
+              </div>
+              <div class="tech-item">
+                <div class="tech-dot"></div>
+                <div>
+                  <p class="tech-name">Gemini AI Assistant</p>
+                  <p class="tech-desc">Medical chat berbasis konteks diagnosis</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ CONDITIONS ═══════════════════════ -->
+  <section class="section" id="conditions">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Kapabilitas Deteksi</span>
+        <h2 class="section-title">7 Detectable Conditions</h2>
+        <p class="section-sub">Model AI dilatih untuk mengenali tujuh jenis kondisi lesi kulit berikut.</p>
+      </div>
+
+      <div class="conditions-grid">
+        <div class="cond-card">
+          <div class="cond-icon-wrap" style="--cc:#ef4444">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12s1.5-3 4-3 4 3 4 3M8 12s1.5 3 4 3 4-3 4-3" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="cond-name">Melanoma</h3>
+          <p class="cond-desc">Kanker kulit paling berbahaya yang berasal dari sel melanosit.</p>
+          <span class="cond-risk high">Risiko Tinggi</span>
+        </div>
+
+        <div class="cond-card">
+          <div class="cond-icon-wrap" style="--cc:#f97316">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 9h6M9 12h6M9 15h4" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="cond-name">Basal Cell Carcinoma</h3>
+          <p class="cond-desc">Jenis kanker kulit paling umum, berkembang di lapisan basal.</p>
+          <span class="cond-risk high">Risiko Tinggi</span>
+        </div>
+
+        <div class="cond-card">
+          <div class="cond-icon-wrap" style="--cc:#eab308">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="cond-name">Actinic Keratosis</h3>
+          <p class="cond-desc">Pertumbuhan kulit kasar akibat paparan sinar UV berlebih.</p>
+          <span class="cond-risk medium">Risiko Sedang</span>
+        </div>
+
+        <div class="cond-card">
+          <div class="cond-icon-wrap" style="--cc:#a855f7">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="cond-name">Benign Keratosis</h3>
+          <p class="cond-desc">Pertumbuhan kulit jinak yang umum ditemukan pada orang dewasa.</p>
+          <span class="cond-risk low">Risiko Rendah</span>
+        </div>
+
+        <div class="cond-card">
+          <div class="cond-icon-wrap" style="--cc:#06b6d4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <h3 class="cond-name">Melanocytic Nevus</h3>
+          <p class="cond-desc">Tanda lahir atau tahi lalat yang terbentuk dari sel melanosit.</p>
+          <span class="cond-risk low">Risiko Rendah</span>
+        </div>
+
+        <div class="cond-card">
+          <div class="cond-icon-wrap" style="--cc:#10b981">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <h3 class="cond-name">Vascular Lesion</h3>
+          <p class="cond-desc">Kondisi yang mempengaruhi pembuluh darah di lapisan kulit.</p>
+          <span class="cond-risk medium">Risiko Sedang</span>
+        </div>
+
+        <div class="cond-card">
+          <div class="cond-icon-wrap" style="--cc:#6366f1">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <h3 class="cond-name">Dermatofibroma</h3>
+          <p class="cond-desc">Benjolan kulit jinak yang biasanya muncul di tungkai bawah.</p>
+          <span class="cond-risk low">Risiko Rendah</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FEATURES ═══════════════════════ -->
+  <section class="section section-light" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Keunggulan Sistem</span>
+        <h2 class="section-title">Why Choose SkinGuard AI?</h2>
+        <p class="section-sub">Sistem dirancang dengan fokus pada kecepatan, kejelasan, dan kemudahan penggunaan.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feat-card feat-large">
+          <div class="feat-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Analisis Instan</h3>
+          <p>Hasil analisis ditampilkan secara cepat melalui sistem AI real-time. Proses inferensi model berlangsung kurang dari satu detik.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Akurasi Tinggi</h3>
+          <p>Model EfficientNetB0 dilatih menggunakan dataset HAM10000 dengan balanced training set dan Test-Time Augmentation.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <h3>Privasi Terjaga</h3>
+          <p>Gambar diproses secara aman dan tidak disimpan permanen setelah analisis selesai dilakukan.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3>AI Medical Assistant</h3>
+          <p>Pengguna dapat bertanya mengenai hasil prediksi melalui AI Assistant berbasis Gemini AI.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M3 12h3m12 0h3M12 3v3m0 12v3M5.64 5.64l2.12 2.12m8.48 8.48l2.12 2.12M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12"/></svg>
+          </div>
+          <h3>Smart Visualization</h3>
+          <p>Sistem menampilkan distribusi probabilitas tiap kelas agar hasil prediksi lebih mudah dipahami.</p>
+        </div>
+
+        <div class="feat-card feat-large">
+          <div class="feat-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Rekomendasi Rumah Sakit</h3>
+          <p>Sistem menyediakan daftar rumah sakit di seluruh wilayah Jawa Timur sebagai langkah tindak lanjut setelah screening awal selesai dilakukan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ HOW IT WORKS ═══════════════════════ -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Alur Sistem</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-sub">Proses deteksi berlangsung dalam empat langkah sederhana.</p>
+      </div>
+
+      <div class="steps-wrap">
+        <div class="steps-connector"></div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <h3>Upload Gambar</h3>
+            <p>Unggah foto area kulit yang ingin dianalisis, atau gunakan kamera secara langsung.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 012 2v2a2 2 0 01-2 2 2 2 0 01-2-2V4a2 2 0 012-2z"/><path d="M20 10a2 2 0 00-2-2h-1V7a5 5 0 00-10 0v1H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V10z"/></svg>
+            </div>
+            <h3>AI Processing</h3>
+            <p>Sistem AI memproses dan menganalisis pola gambar kulit secara otomatis.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3>Klasifikasi</h3>
+            <p>Model melakukan klasifikasi kondisi kulit berdasarkan hasil analisis dan probabilitas.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <div class="step-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3>Lihat Hasil</h3>
+            <p>Hasil prediksi, tingkat keyakinan, tingkat risiko, dan distribusi probabilitas ditampilkan secara instan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ UPLOAD / DETEKSI ═══════════════════════ -->
+  <section class="section section-light" id="deteksi">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Analisis AI</span>
+        <h2 class="section-title">Deteksi Penyakit Kulit</h2>
+        <p class="section-sub">Upload atau ambil foto lesi kulit untuk mendapatkan analisis AI secara instan.</p>
+      </div>
+
+      <div class="upload-layout">
+        <div class="upload-card" id="uploadCard">
+          <div class="upload-tabs">
+            <button class="utab active" id="tabUpload" onclick="switchTab('upload')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload Gambar
+            </button>
+            <button class="utab" id="tabCamera" onclick="switchTab('camera')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              Kamera Langsung
+            </button>
+          </div>
+
+          <div class="tab-panel" id="panelUpload">
+            <div class="drop-zone" id="dropZone"
+              ondragover="handleDragOver(event)"
+              ondragleave="handleDragLeave(event)"
+              ondrop="handleDrop(event)"
+              onclick="document.getElementById('fileInput').click()">
+              <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(event)" />
+              <div class="drop-icon-wrap">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="drop-title">Seret dan Lepas gambar di sini</p>
+              <p class="drop-sub">atau klik untuk memilih file dari perangkat</p>
+              <span class="drop-badge">JPG · PNG · WEBP · Maks. 10 MB</span>
+            </div>
+          </div>
+
+          <div class="tab-panel hidden" id="panelCamera">
+            <div class="camera-container">
+              <video id="cameraVideo" autoplay playsinline></video>
+              <canvas id="cameraCanvas" style="display:none"></canvas>
+              <div class="camera-controls">
+                <button class="btn-outline" onclick="startCamera()" id="btnStartCam">Aktifkan Kamera</button>
+                <button class="btn-primary-sm hidden" onclick="capturePhoto()" id="btnCapture">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+                  Ambil Foto
+                </button>
+                <button class="btn-ghost-sm hidden" onclick="stopCamera()" id="btnStopCam">Hentikan Kamera</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-wrap hidden" id="previewContainer">
+            <div class="preview-topbar">
+              <span class="preview-lbl">Pratinjau Gambar</span>
+              <button class="btn-icon-sm" onclick="clearImage()" title="Hapus gambar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+            <img id="previewImage" src="" alt="Preview" />
+          </div>
+
+          <div class="upload-actions">
+            <button class="btn-analyze" id="btnAnalyze" onclick="analyzeImage()" disabled>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Analisis Sekarang
+            </button>
+            <p class="upload-tip">Pastikan gambar lesi kulit terlihat jelas dengan pencahayaan yang cukup.</p>
+          </div>
+        </div>
+
+        <div class="upload-info-panel">
+          <div class="uip-card">
+            <div class="uip-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h4>Tips Pengambilan Gambar</h4>
+            <ul class="uip-list">
+              <li>Pastikan area kulit terlihat jelas tanpa hambatan</li>
+              <li>Gunakan pencahayaan yang cukup, hindari bayangan</li>
+              <li>Jarak kamera 10-15 cm dari area kulit</li>
+              <li>Fokus pada area lesi yang ingin dianalisis</li>
+            </ul>
+          </div>
+          <div class="uip-card uip-warning">
+            <div class="uip-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <h4>Penting untuk Diketahui</h4>
+            <p>Hasil analisis ini bersifat indikatif dan tidak menggantikan diagnosis dokter spesialis kulit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ LOADING OVERLAY ═══════════════════════ -->
+  <div class="loading-overlay hidden" id="loadingOverlay">
+    <div class="loading-card">
+      <div class="loading-rings">
+        <div class="lring lring-1"></div>
+        <div class="lring lring-2"></div>
+        <div class="lring lring-3"></div>
+        <div class="lring-core">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#lGrad)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <defs><linearGradient id="lGrad"><stop stop-color="#f472b6"/><stop offset="1" stop-color="#c026d3"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+      <p class="loading-title">Menganalisis Gambar</p>
+      <p class="loading-step" id="loadingStep">Memproses gambar dengan model AI...</p>
+      <div class="loading-steps-list">
+        <div class="lst-item active" id="lstep1">
+          <div class="lst-dot"></div>
+          <span>Preprocessing gambar</span>
+        </div>
+        <div class="lst-item" id="lstep2">
+          <div class="lst-dot"></div>
+          <span>Inferensi model CNN</span>
+        </div>
+        <div class="lst-item" id="lstep3">
+          <div class="lst-dot"></div>
+          <span>Menghitung tingkat keyakinan</span>
+        </div>
+        <div class="lst-item" id="lstep4">
+          <div class="lst-dot"></div>
+          <span>Memuat analisis probabilitas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ RESULT ═══════════════════════ -->
+  <section class="section hidden" id="sectionResult">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Hasil Analisis</span>
+        <h2 class="section-title">Hasil Analisis AI</h2>
+        <p class="section-sub">Berikut adalah hasil analisis model AI terhadap gambar yang diupload.</p>
+      </div>
+
+      <div class="result-dashboard">
+        <!-- Row 1: Diagnosis + Probability -->
+        <div class="result-main">
+          <div class="rcard rcard-diagnosis">
+            <div class="rcard-label">Diagnosis Utama</div>
+            <div class="risk-badge-wrap" id="resultRiskBadge">—</div>
+            <div class="diag-name" id="resultLabel">—</div>
+            <div class="diag-code" id="resultClass">—</div>
+
+            <div class="conf-block">
+              <div class="conf-header">
+                <span class="conf-lbl">Confidence Score</span>
+                <span class="conf-num" id="confVal">—</span>
+              </div>
+              <div class="conf-track">
+                <div class="conf-fill" id="confBar" style="width:0%"></div>
+              </div>
+            </div>
+
+            <div class="risk-row" id="riskInfo">
+              <div class="risk-indicator" id="riskIcon"></div>
+              <span class="risk-text" id="riskDesc">—</span>
+            </div>
+          </div>
+
+          <div class="rcard rcard-prob">
+            <div class="rcard-label">Distribusi Probabilitas</div>
+            <div class="prob-list" id="probList"></div>
+          </div>
+        </div>
+
+        <!-- Row 2: GradCAM -->
+        <div class="rcard rcard-gradcam" id="gradcamCard">
+          <div class="rcard-label">GradCAM Visualization</div>
+          <p class="gcam-subtitle">Menampilkan area kulit yang dianalisis AI.</p>
+          <div class="gcam-images-row">
+            <div class="gcam-img-card">
+              <span class="gcam-lbl">Gambar Asli</span>
+              <div class="gcam-img-wrap">
+                <img id="originalImageGcam" src="" alt="Original" />
+              </div>
+            </div>
+            <div class="gcam-arrow-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+            <div class="gcam-img-card">
+              <span class="gcam-lbl">GradCAM Heatmap</span>
+              <div class="gcam-img-wrap" id="gcamImgWrap">
+                <div class="gcam-loading hidden" id="gcamLoading">
+                  <div class="mini-spinner"></div>
+                  <span>Memuat visualisasi GradCAM...</span>
+                </div>
+                <div class="gcam-placeholder hidden" id="gcamPlaceholder">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <p>Visualisasi GradCAM belum tersedia.</p>
+                </div>
+                <img id="gradcamImage" src="" alt="GradCAM Heatmap" class="hidden" />
+              </div>
+            </div>
+          </div>
+          <div class="gcam-info-row">
+            <div class="gcam-legend">
+              <span class="legend-label">Intensitas Area:</span>
+              <div class="legend-items">
+                <span class="leg-dot" style="background:#2563eb"></span><span>Rendah</span>
+                <span class="leg-dot" style="background:#f59e0b"></span><span>Sedang</span>
+                <span class="leg-dot" style="background:#ef4444"></span><span>Tinggi</span>
+              </div>
+            </div>
+            <p class="gcam-note">GradCAM membantu menunjukkan area citra yang berpengaruh terhadap prediksi model. Visualisasi ini bersifat interpretatif dan tidak menggantikan diagnosis dokter.</p>
+          </div>
+        </div>
+
+        <!-- Row 3: Next Step / Actions -->
+        <div class="rcard rcard-nextstep">
+          <div class="rcard-label">Langkah Selanjutnya</div>
+          <p class="nextstep-rec" id="nextStepRec">Silakan konsultasikan hasil ini kepada dokter spesialis kulit untuk penanganan lebih lanjut.</p>
+          <div class="result-actions-bar">
+            <button class="btn-outline-sm" onclick="clearResults()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+              Analisis Ulang
+            </button>
+            <button class="btn-primary-sm" onclick="scrollToSection('chat')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              Konsultasi AI
+            </button>
+            <button class="btn-outline-sm btn-rs" onclick="scrollToSection('rumah-sakit')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Lihat Rumah Sakit Rujukan
+            </button>
+          </div>
+          <p class="result-disclaimer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            SkinGuard AI hanya digunakan sebagai alat bantu skrining awal dan edukasi. Hasil prediksi tidak menggantikan diagnosis dokter.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ AI CHAT ═══════════════════════ -->
+  <section class="section" id="chat">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">AI Medical Assistant</span>
+        <h2 class="section-title">Konsultasi dengan AI</h2>
+        <p class="section-sub">Tanyakan informasi medis seputar kondisi kulit Anda kepada asisten AI berbasis Gemini.</p>
+      </div>
+
+      <div class="chat-layout">
+        <div class="chat-card">
+          <div class="chat-header-bar">
+            <div class="chat-ai-avatar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 012 2v2a2 2 0 01-2 2 2 2 0 01-2-2V4a2 2 0 012-2z"/><path d="M20 10a2 2 0 00-2-2h-1V7a5 5 0 00-10 0v1H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V10z"/></svg>
+            </div>
+            <div>
+              <p class="chat-ai-name">SkinGuard AI Assistant</p>
+              <p class="chat-ai-status"><span class="status-dot"></span>Aktif sekarang</p>
+            </div>
+          </div>
+
+          <div class="chat-ctx-banner" id="chatContext">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="ctxDiagnosis">Belum ada hasil analisis. Lakukan deteksi gambar terlebih dahulu.</span>
+          </div>
+
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg ai-msg">
+              <div class="msg-ava">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a2 2 0 012 2v2a2 2 0 01-2 2 2 2 0 01-2-2V4a2 2 0 012-2z"/><path d="M20 10a2 2 0 00-2-2h-1V7a5 5 0 00-10 0v1H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V10z"/></svg>
+              </div>
+              <div class="msg-content">
+                <div class="msg-bubble">
+                  Halo! Saya adalah AI Medical Assistant SkinGuard. Saya siap membantu memberikan informasi medis seputar penyakit kulit. Silakan upload gambar terlebih dahulu untuk analisis yang lebih akurat, atau langsung ajukan pertanyaan Anda.
+                </div>
+                <span class="msg-time">Sekarang</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-input-area">
+            <div class="chat-input-wrap">
+              <textarea
+                id="chatInput"
+                placeholder="Tanyakan sesuatu tentang kondisi kulit atau hasil analisis..."
+                rows="1"
+                onkeydown="handleChatKey(event)"
+                oninput="autoResize(this)"></textarea>
+              <button class="chat-send-btn" id="chatSendBtn" onclick="sendChat()">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </div>
+            <p class="chat-disclaimer">Informasi dari AI ini tidak menggantikan konsultasi dokter spesialis kulit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ RUMAH SAKIT ═══════════════════════ -->
+  <section class="section section-light" id="rumah-sakit">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Rekomendasi Medis</span>
+        <h2 class="section-title">Rekomendasi Rumah Sakit di Jawa Timur</h2>
+        <p class="section-sub">Temukan rumah sakit dermatologi di seluruh wilayah Jawa Timur sebagai langkah tindak lanjut.</p>
+      </div>
+
+      <div class="hospital-filter-row">
+        <div class="hf-select-wrap">
+          <svg class="hf-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <select id="citySelect" onchange="fetchHospitals()">
+            <option value="">Pilih Kota / Kabupaten</option>
+          </select>
+          <svg class="hf-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <button class="btn-primary-sm" onclick="fetchHospitals()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Cari Rumah Sakit
+        </button>
+      </div>
+
+      <div class="hospital-loading hidden" id="hospitalLoading">
+        <div class="mini-spinner"></div>
+        <span>Memuat data rumah sakit...</span>
+      </div>
+
+      <div class="hospital-grid" id="hospitalGrid"></div>
+
+      <div class="hospital-empty hidden" id="hospitalEmpty">
+        <div class="empty-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <p>Pilih kota terlebih dahulu untuk melihat daftar rumah sakit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ PREDICTION HISTORY ═══════════════════════ -->
+  <section class="section" id="history">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Riwayat</span>
+        <h2 class="section-title">Hasil Riwayat Prediksi</h2>
+        <p class="section-sub">Daftar hasil analisis yang telah dilakukan pada sesi ini.</p>
+      </div>
+
+      <div class="history-card">
+        <div class="history-toolbar">
+          <span class="history-count" id="historyCount">0 data</span>
+          <button class="btn-ghost-sm" onclick="clearHistory()">Hapus Semua</button>
+        </div>
+
+        <div class="history-table-wrap">
+          <table class="history-table" id="historyTable">
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Gambar</th>
+                <th>Nama Pasien</th>
+                <th>Hasil Prediksi</th>
+                <th>Kategori</th>
+                <th>Confidence</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody">
+              <tr class="history-empty-row" id="historyEmptyRow">
+                <td colspan="6">
+                  <div class="history-empty">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <p>Belum ada riwayat prediksi. Lakukan analisis untuk melihat hasilnya di sini.</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ABOUT TECH ═══════════════════════ -->
+  <section class="section section-light" id="tentang">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tentang Proyek</span>
+        <h2 class="section-title">SkinGuard AI</h2>
+        <p class="section-sub">Proyek Sains Data — Sistem AI End-to-End untuk Deteksi Penyakit Kulit</p>
+      </div>
+
+      <div class="about-cards-grid">
+        <div class="about-card">
+          <div class="ac-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M6.343 6.343a8 8 0 000 11.314M17.657 6.343a8 8 0 010 11.314M4 12H2M22 12h-2M12 4V2M12 22v-2"/></svg>
+          </div>
+          <h3>Model Transfer Learning</h3>
+          <p>Arsitektur EfficientNetB0 dilatih pada dataset HAM10000 dengan balanced training set untuk mengklasifikasikan 7 jenis lesi kulit secara otomatis.</p>
+        </div>
+        <div class="about-card">
+          <div class="ac-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Test-Time Augmentation</h3>
+          <p>Prediksi menggunakan gambar asli dan hasil flip horizontal, lalu probabilitas dirata-rata untuk meningkatkan stabilitas hasil.</p>
+        </div>
+        <div class="about-card">
+          <div class="ac-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3>AI Chat Medis</h3>
+          <p>Integrasi Gemini AI sebagai medical assistant yang memberikan edukasi berbasis konteks diagnosis hasil prediksi.</p>
+        </div>
+        <div class="about-card">
+          <div class="ac-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Referral System</h3>
+          <p>Database rumah sakit seluruh Jawa Timur sebagai sistem rekomendasi rujukan pasien untuk tindak lanjut medis.</p>
+        </div>
+        <div class="about-card">
+          <div class="ac-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>FastAPI Backend</h3>
+          <p>Backend REST API berkecepatan tinggi dengan FastAPI, TensorFlow, dan OpenCV untuk inferensi model secara real-time.</p>
+        </div>
+        <div class="about-card">
+          <div class="ac-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <h3>Docker Ready</h3>
+          <p>Sistem dikemas dalam Docker container sehingga mudah dijalankan di berbagai environment secara konsisten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <span class="logo-mark">
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="10" fill="url(#logoGradF)"/>
+                <path d="M10 16c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="16" cy="19" r="3" fill="#fff"/>
+                <defs>
+                  <linearGradient id="logoGradF" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#f472b6"/>
+                    <stop offset="1" stop-color="#c026d3"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+            <span class="logo-text">Skin<span class="logo-accent">Guard</span> <span class="logo-ai">AI</span></span>
+          </a>
+          <p class="footer-desc">Intelligent Skin Disease Detection & Clinical Decision Support System</p>
+          <p class="footer-sub-desc">Proyek Sains Data — Sistem AI End-to-End</p>
+        </div>
+
+        <div class="footer-nav-group">
+          <span class="footer-nav-title">Fitur</span>
+          <a href="#deteksi">Deteksi Penyakit</a>
+          <a href="#sectionResult">Hasil Analisis</a>
+          <a href="#chat">AI Chat</a>
+          <a href="#rumah-sakit">Rumah Sakit</a>
+          <a href="#history">Riwayat Prediksi</a>
+        </div>
+
+        <div class="footer-nav-group">
+          <span class="footer-nav-title">Teknologi</span>
+          <a href="#tentang">EfficientNetB0</a>
+          <a href="#tentang">HAM10000 Dataset</a>
+          <a href="#tentang">Gemini AI</a>
+          <a href="#tentang">FastAPI</a>
+          <a href="#tentang">Docker</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 SkinGuard AI — Proyek Sains Data</p>
+        <p class="footer-disclaimer">Untuk tujuan edukasi dan penelitian. Bukan pengganti diagnosis medis profesional.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+cat > .gitignore <<'EOF'
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+backend/.venv/
+
+# Environment / secret
+.env
+backend/.env
+
+# Dataset
+dataset/raw/
+dataset/processed/
+dataset/processed_balanced/
+
+# Training results
+result/
+
+# Frontend
+node_modules/
+dist/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Backup files
+*.bak
+*.bak2
+EOF
