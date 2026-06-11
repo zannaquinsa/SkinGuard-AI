@@ -70,7 +70,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://skin-guard-ai-seven.vercel.app"
+        "http://localhost:3000",
+        "https://skin-guard-ai-seven.vercel.app",
+        "https://skin-guard-ai-delta.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
