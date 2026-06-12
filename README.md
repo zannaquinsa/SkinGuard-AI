@@ -13,7 +13,7 @@ Project ini dibuat untuk memenuhi tugas mata kuliah Pengantar Proyek Sains Data.
 - Nama Project: SkinGuard AI
 - Kelompok: 06
 - Anggota:
-  - Kasih Kristanti N. - 5052231031
+  - Kasih Kristanti N. - 5052231033
   - Putri Amalia F. - 5052231037
   - Zanna Quinsa H.D - 5052231039
 
